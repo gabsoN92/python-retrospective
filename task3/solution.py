@@ -24,35 +24,21 @@ class Person:
         else:
             return self.ListOfChildren
 
+    def is_female(self):
+        return self.gender == 'F'
+
+    def is_male(self):
+        return self.gender == 'M'
+
+    def siblings(self):
+        all_kids = set(self.mother.children() + self.father.children()) - {self}
+        return all_kids
+
     def get_brothers(self):
-        FatherKids = set()
-        MotherKids = set()
-
-        if self.father is not None:
-            FatherKids = {kid for kid in self.father.children()
-                          if (kid is not self) and (kid.gender == 'M')}
-        if self.mother is not None:
-            MotherKids = {kid for kid in self.mother.children()
-                          if (kid is not self) and (kid.gender == 'M')}
-
-        allChildren = list(MotherKids.union(FatherKids))
-        return allChildren
+        return list(kid for kid in self.siblings() if kid.is_male())
 
     def get_sisters(self):
-        FatherKids = set()
-        MotherKids = set()
-
-        if self.father is not None:
-            FatherKids = {kid for kid in self.father.children()
-                          if (kid is not self) and (kid.gender == 'F')}
-
-        if self.mother is not None:
-            MotherKids = {kid for kid in self.mother.children()
-                          if (kid is not self) and (kid.gender == 'F')}
-
-        allChildren = list(MotherKids.union(FatherKids))
-
-        return list(allChildren)
+        return list(kid for kid in self.siblings() if kid.is_female())
 
     def is_direct_successor(self, successor):
 

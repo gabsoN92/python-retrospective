@@ -1,7 +1,7 @@
 import unittest
 from itertools import repeat
 
-from . import solution
+import solution
 
 
 class SecondHomeworkTests(unittest.TestCase):
