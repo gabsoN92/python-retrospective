@@ -31,7 +31,8 @@ class Person:
         return self.gender == 'M'
 
     def siblings(self):
-        all_kids = set(self.mother.children() + self.father.children()) - {self}
+        all_kids = set(self.mother.children() + self.father.children())
+        all_kids = all_kids - {self}
         return all_kids
 
     def get_brothers(self):
@@ -47,3 +48,4 @@ class Person:
 
         else:
             return False
+
